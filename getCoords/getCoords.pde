@@ -1,3 +1,16 @@
+/*
+ * Processing Coordinates
+ *
+ * Simple project to display the x and y coordinates for a point selected 
+ * by the mouse. 
+ * by Keith Kay
+ * 2/2/2013
+ * CC by-sa v3.0 - http://creativecommons.org/licenses/by-sa/3.0/
+ * http://keithkay.com
+ *
+ *
+ */
+ 
 int prevX;
 int prevY;
 int refLine;
@@ -48,6 +61,7 @@ void draw(){
     
   }
   
+  // uncomment below to get a screen grab on key press
   //if (keyPressed){
   //  saveFrame("getCoords_grab_###.png");
   //}
