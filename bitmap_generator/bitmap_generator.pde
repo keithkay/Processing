@@ -22,7 +22,6 @@ String filename="";       // variable to store the filename used to save all the
 int cols = 8;  // used as a constant
 int rows = 8;  // used as a constant
 
-
 void setup() {
   
   // build the grid used to represent each "pixel" of the bitmap
