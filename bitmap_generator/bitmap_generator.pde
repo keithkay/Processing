@@ -1,7 +1,7 @@
 /*
  * Bitmap generator for an 8x8 LED matrix
  * by Keith Kay
- * 2/2/2013
+ * 7/8/2013
  * CC by-sa v3.0 - http://creativecommons.org/licenses/by-sa/3.0/
  * http://keithkay.com
  *
@@ -12,28 +12,31 @@
  *
  */
 
+/* Declare our variables */
+Cell[][] bitmap;          // 2-dimensonal array used to store the bitmap
+PrintWriter bitmapOutput; // declare an instance of PrinterWriter, a processing class that allows characters to print to a text-output stream.
+int bitmapOutputCount=0;  // variable to store the count of the number of bitmaps saved as a file
+int imgFrameCount=0;      // variable to store the numbers of frames in the current file
+String filename="";       // variable to store the filename used to save all the bitmap frames
 
-Cell[][] bitmap;
+int cols = 8;  // used as a constant
+int rows = 8;  // used as a constant
 
-PrintWriter bitmapOutput;
-int bitmapOutputCount=0;
-int imgFrameCount=0;
-String filename="";
-
-int cols = 8;
-int rows = 8;
 
 void setup() {
   
+  // build the grid used to represent each "pixel" of the bitmap
   size(360,450);
   bitmap = new Cell[rows][cols];
   
+  // iterate thru each cell and initialize it, passing sizing information, in this case 45x45
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
-      // Initialize each object
       bitmap[i][j] = new Cell(i*45,j*45,45,45);
     }
   }
+  
+  // finish drawing the window, including directions
   background(204);
   textSize(11);
   textAlign(LEFT);
@@ -48,11 +51,9 @@ void setup() {
   
 }
 
+// draw() is the main function in Processing, like loop() in an Arduino sketch
 void draw() {
-  
-  drawBitMap();
-  
-
+  drawBitMap();  
 }
 
 void drawBitMap() {
@@ -76,14 +77,15 @@ void mouseClicked() {
   }
 }
 
+// keyReleased detects when a key has been pressed and released, this was found to be more reliable
+// for getting one execution of this function than keyPressed
 void keyReleased() {
-  
   // f - save the current frame
   if ((key =='f') || (key == 'F')) {
     // export the bitmap to a file
-    saveFrame("bitmaps/bitmap-####.jpg");
+    saveFrame("bitmaps/bitmap-####.jpg"); // these are going to be saved in the project folder of your Processing folder
     
-    // write the header line and then traverse the array to write the bits
+    // write the header line and then traverse the array to write the bits for an entire "frame"
     imgFrameCount++;
     bitmapOutput.print("{ ");
     for (int i = 0; i < rows; i++) {
